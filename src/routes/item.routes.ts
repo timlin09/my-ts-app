@@ -14,11 +14,11 @@ class ItemRoutes extends MainRoute {
     this.router.get('/test', (req: Request, res: Response) => {
       res.status(200).send('you called item path test!');
     });
-    this.router.route('/item')
+    this.router.route('/items')
       .get(ItemController.getAll)
       .post(ItemController.createOne);
 
-    this.router.route('/item/:id')
+    this.router.route('/items/:id')
       .get(ItemController.getOne)
       .put(ItemController.updateOne)
       .delete(ItemController.deleteOne);

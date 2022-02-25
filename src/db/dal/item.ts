@@ -1,5 +1,3 @@
-import { Op } from 'sequelize';
-import { GetItemsFilters } from './types';
 import ItemModel, { ItemInput, ItemOuput } from '../model/item.model';
 
 export const createItem = async (payload: ItemInput): Promise<ItemOuput> => {
@@ -33,9 +31,6 @@ export const deleteById = async (id: number): Promise<boolean> => {
   return !!deletedItemModelCount;
 };
 
-export const getAll = async (filters?: GetItemsFilters): Promise<ItemOuput[]> => ItemModel.findAll({
-  where: {
-    ...(filters?.isDeleted && { deletedAt: { [Op.not]: null } }),
-  },
-  ...((filters?.isDeleted || filters?.includeDeleted) && { paranoid: true }),
+export const getAll = async (limit: number = 10): Promise<ItemOuput[]> => ItemModel.findAll({
+  limit,
 });

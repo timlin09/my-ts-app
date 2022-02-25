@@ -26,7 +26,7 @@ class ItemModel extends Model<ItemAttributes, ItemInput> implements ItemAttribut
 
 ItemModel.init({
   id: {
-    type: DataTypes.INTEGER.UNSIGNED,
+    type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true,
   },
