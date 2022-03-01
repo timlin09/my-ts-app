@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
 import {
   getById, getAll, createItem, update, deleteById,
-} from '../db/dal/item';
-import getRandomInt from '../utils/getRandom';
-import { ItemInput } from '../db/model/item.model';
+} from '../../db/dal/item';
+import getRandomInt from '../../utils/getRandom';
+import { ItemInput } from '../../db/model/item.model';
 
 class itemController {
   static async getOne(req:Request, res:Response): Promise<Response> {

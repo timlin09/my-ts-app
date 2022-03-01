@@ -2,6 +2,7 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
+    'jest/globals': true,
   },
   extends: 'airbnb-base',
   parser: '@typescript-eslint/parser',
@@ -11,13 +12,10 @@ module.exports = {
   },
   plugins: [
     '@typescript-eslint',
+    'jest',
   ],
   rules: {
     'no-console': 'off',
-    // 'import/no-duplicates': [
-    //   'error',
-    //   { considerQueryString: true },
-    // ],
     'import/extensions': [
       'error',
       'ignorePackages',

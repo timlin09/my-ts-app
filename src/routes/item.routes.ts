@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import MainRoute from './route.abstract';
-import ItemController from '../controllers/itemController';
+import ItemController from '../controllers/items/itemController';
 
 class ItemRoutes extends MainRoute {
   private itemController: ItemController = new ItemController();

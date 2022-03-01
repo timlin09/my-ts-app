@@ -7,6 +7,7 @@ export interface ItemAttributes {
   price: number;
   createdAt?: Date;
   updatedAt?: Date;
+  deleteAt?: Date;
 }
 
 export interface ItemInput extends Optional<ItemAttributes, 'id'> {}
@@ -22,6 +23,8 @@ class ItemModel extends Model<ItemAttributes, ItemInput> implements ItemAttribut
   public readonly createdAt!: Date;
 
   public readonly updatedAt!: Date;
+
+  public readonly deleteAt!: Date;
 }
 
 ItemModel.init({
