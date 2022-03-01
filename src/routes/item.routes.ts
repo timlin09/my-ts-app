@@ -31,7 +31,7 @@ class ItemRoutes extends MainRoute {
    * @route POST /items
    * @param {object} request.body - ex. {"name": "john", "price": 100}
    * @returns {{}} 200 - success, return inserted data & related info
-   * @returns {Error} 501 - invaild name/price value error
+   * @returns {Error} 404 - invaild name/price value error
    * @returns {Error} 500 - unexpected error
    */
       .post(ItemController.createOne);
@@ -45,7 +45,7 @@ class ItemRoutes extends MainRoute {
         * @route GET /items/{id}
         * @param {integer} id.path.required - ex. 1 (required)
         * @returns {{}} 200 - success, return inserted data & related info
-        * @returns {Error} 501 - invaild itemId error
+        * @returns {Error} 404 - invaild itemId error
         * @returns {Error} 500 - unexpected error
       */
       .get(ItemController.getOne)
@@ -59,7 +59,7 @@ class ItemRoutes extends MainRoute {
         * @param {object} request.body - ex. {"name": "xxx", "priec": 100}
         * @returns {{}} 200 - success, return inserted data & related info
         * @returns {Error} 404 - can not find id or update data
-        * @returns {Error} 501 - invaild itemId error
+        * @returns {Error} 404 - invaild itemId error
         * @returns {Error} 500 - unexpected error
       */
       .put(ItemController.updateOne)
@@ -70,7 +70,7 @@ class ItemRoutes extends MainRoute {
         * @route DELETE /items/{id}
         * @param {integer} id.path.required - ex. 1 (required)
         * @returns {{}} 200 - success, return inserted data & related info
-        * @returns {Error} 501 - invaild itemId error
+        * @returns {Error} 404 - invaild itemId error
         * @returns {Error} 500 - unexpected error
       */
       .delete(ItemController.deleteOne);
