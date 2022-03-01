@@ -31,7 +31,7 @@ class itemController {
 
   static async createOne(req:Request, res:Response): Promise<Response> {
     const newItem: ItemInput = req.body || {};
-    if (!newItem?.name || !newItem.price) {
+    if (!newItem.name || !newItem.price) {
       return res.status(501).json({ message: 'invalid name/price value!', data: null });
     }
 
@@ -53,11 +53,11 @@ class itemController {
     try {
       const item = await getById(itemId);
       if (!item || !item.id) {
-        return res.status(502).json({ message: `can not find item by ${itemId}`, data: null });
+        return res.status(404).json({ message: `can not find item by ${itemId}`, data: null });
       }
 
       if (Object.keys(itemData).length === 0) {
-        return res.status(501).json({ message: 'no update data!!', daga: null });
+        return res.status(404).json({ message: 'no update data!!', daga: null });
       }
 
       const totalPrice = item.price + itemData.price;
@@ -91,8 +91,6 @@ class itemController {
       }
 
       const rntNumber:number = getRandomInt(100);
-
-      console.log(rntNumber);
 
       if (item.price - rntNumber < 0) {
         await deleteById(itemId);

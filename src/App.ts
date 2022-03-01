@@ -1,6 +1,9 @@
 import express from 'express';
-import router from './routes/router';
 import dbInit from './db/init';
+import router from './routes/router';
+import config from './config';
+
+const swagger = require('express-swagger-generator');
 
 class App {
   public app: express.Application;
@@ -20,6 +23,7 @@ class App {
   private config(): void {
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
+    swagger(this.app)(config);
   }
 
   private routerSetup(): void {
