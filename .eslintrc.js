@@ -14,10 +14,10 @@ module.exports = {
   ],
   rules: {
     'no-console': 'off',
-    'import/no-duplicates': [
-      'error',
-      { considerQueryString: true },
-    ],
+    // 'import/no-duplicates': [
+    //   'error',
+    //   { considerQueryString: true },
+    // ],
     'import/extensions': [
       'error',
       'ignorePackages',
