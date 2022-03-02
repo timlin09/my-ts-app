@@ -1,12 +1,16 @@
 import { Request, Response } from 'express';
 import MainRoute from './route.abstract';
-import ItemController from '../controllers/items/itemController';
+import ItemDal from '../db/dal/item';
+import ItemController from '../controllers/items/item.controller';
 
+const a = new ItemDal();
+console.log(a.getAll);
 class ItemRoutes extends MainRoute {
-  private itemController: ItemController = new ItemController();
+  private itemController: ItemController<ItemDal>;
 
   constructor() {
     super();
+    this.itemController = new ItemController(a);
     this.setRoutes();
   }
 
@@ -23,7 +27,7 @@ class ItemRoutes extends MainRoute {
    * @returns {{}} 200 - success, return inserted data & related info
    * @returns {Error} 500 - unexpected error
    */
-      .get(ItemController.getAll)
+      .get(this.itemController.getAllItems)
     /**
    * create item
    *
@@ -34,7 +38,7 @@ class ItemRoutes extends MainRoute {
    * @returns {Error} 404 - invaild name/price value error
    * @returns {Error} 500 - unexpected error
    */
-      .post(ItemController.createOne);
+      .post(this.itemController.createOne);
 
     this.router.route('/items/:id')
 
@@ -48,7 +52,7 @@ class ItemRoutes extends MainRoute {
         * @returns {Error} 404 - invaild itemId error
         * @returns {Error} 500 - unexpected error
       */
-      .get(ItemController.getOne)
+      .get(this.itemController.getOneItem)
 
       /**
         * update items by id
@@ -62,7 +66,7 @@ class ItemRoutes extends MainRoute {
         * @returns {Error} 404 - invaild itemId error
         * @returns {Error} 500 - unexpected error
       */
-      .put(ItemController.updateOne)
+      .put(this.itemController.updateOne)
       /**
         * delete items by id
         *
@@ -73,7 +77,7 @@ class ItemRoutes extends MainRoute {
         * @returns {Error} 404 - invaild itemId error
         * @returns {Error} 500 - unexpected error
       */
-      .delete(ItemController.deleteOne);
+      .delete(this.itemController.deleteOne);
   }
 }
 

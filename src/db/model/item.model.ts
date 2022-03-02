@@ -11,7 +11,7 @@ export interface ItemAttributes {
 }
 
 export interface ItemInput extends Optional<ItemAttributes, 'id'> {}
-export interface ItemOuput extends Required<ItemAttributes> {}
+export interface ItemOutput extends Required<ItemAttributes> {}
 
 class ItemModel extends Model<ItemAttributes, ItemInput> implements ItemAttributes {
   public id!: number;
