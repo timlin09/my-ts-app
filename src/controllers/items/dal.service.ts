@@ -1,9 +1,17 @@
-/* eslint-disable class-methods-use-this */
-import BaseService from './base.service';
 import { BaseDal } from '../../db/dal/item';
+import ItemSampleService from './item.base.service';
 import { ItemInput, ItemOutput } from '../../db/model/item.model';
 
-class DalService<T extends BaseDal> extends BaseService<number, ItemInput, ItemOutput> {
+export interface DalInterface {
+  getOne(_id:number): Promise<ItemOutput|null>;
+  getAll(): Promise<ItemOutput[]|[]>;
+  create(_data:ItemInput): Promise<ItemOutput|null>;
+  update(_id:number, _data:Partial<ItemInput>):Promise<ItemOutput|null>
+  delete(_id:number):Promise<Boolean>
+}
+class DalService<T extends BaseDal>
+  extends ItemSampleService
+  implements DalInterface {
   public dal:T;
 
   constructor(Dal: T) {
@@ -11,30 +19,30 @@ class DalService<T extends BaseDal> extends BaseService<number, ItemInput, ItemO
     this.dal = Dal;
   }
 
-  async getOne(id: number): Promise< ItemOutput | null> {
+  getOne = async (id: number) => {
     const resData = await this.dal.getById(id);
     return resData;
-  }
+  };
 
-  async getAll():Promise< ItemOutput[] | []> {
+  getAll = async () => {
     const resData = await this.dal.getAll();
     return resData;
-  }
+  };
 
-  async create(itemData: ItemInput): Promise<ItemOutput | null> {
+  create = async (itemData: ItemInput) => {
     const resData = await this.dal.createItem(itemData);
     return resData;
-  }
+  };
 
-  async update(id:number, itemData:Partial<ItemInput>): Promise<ItemOutput | null> {
+  update = async (id:number, itemData:Partial<ItemInput>) => {
     const resData = await this.dal.update(id, itemData);
     return resData;
-  }
+  };
 
-  async delete(id: number): Promise<Boolean> {
+  delete = async (id: number) => {
     const isDelete = await this.dal.deleteById(id);
     return isDelete;
-  }
+  };
 }
 
 export default DalService;

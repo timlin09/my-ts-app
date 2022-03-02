@@ -3,18 +3,16 @@ import MainRoute from './route.abstract';
 import ItemDal from '../db/dal/item';
 import ItemController from '../controllers/items/item.controller';
 
-const a = new ItemDal();
-console.log(a.getAll);
 class ItemRoutes extends MainRoute {
   private itemController: ItemController<ItemDal>;
 
   constructor() {
     super();
-    this.itemController = new ItemController(a);
+    this.itemController = new ItemController(new ItemDal());
     this.setRoutes();
   }
 
-  protected setRoutes() {
+  protected setRoutes = () => {
     this.router.get('/test', (req: Request, res: Response) => {
       res.status(200).send('you called item path test!');
     });
@@ -78,7 +76,7 @@ class ItemRoutes extends MainRoute {
         * @returns {Error} 500 - unexpected error
       */
       .delete(this.itemController.deleteOne);
-  }
+  };
 }
 
 export default ItemRoutes;

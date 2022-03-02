@@ -17,12 +17,12 @@ class ItemDal implements BaseDal {
     this.itemModel = ItemModel;
   }
 
-  public async createItem(payload: ItemInput): Promise<ItemOutput> {
+  createItem = async (payload: ItemInput): Promise<ItemOutput> => {
     const newItem = await this.itemModel.create(payload);
     return newItem;
-  }
+  };
 
-  async update(id: number, payload: Partial<ItemInput>): Promise<ItemOutput> {
+  update = async (id: number, payload: Partial<ItemInput>): Promise<ItemOutput> => {
     const item = await this.itemModel.findByPk(id);
     if (!item) {
       // @todo throw custom error
@@ -30,27 +30,25 @@ class ItemDal implements BaseDal {
     }
     const updatedItem = await (item as ItemModel).update(payload);
     return updatedItem;
-  }
+  };
 
-  async getById(id: number): Promise<ItemOutput> {
+  getById = async (id: number): Promise<ItemOutput> => {
     const item = await this.itemModel.findByPk(id);
     if (!item) {
       // @todo throw custom error
       throw new Error('not found');
     }
     return item;
-  }
+  };
 
-  async deleteById(id: number): Promise<boolean> {
+  deleteById = async (id: number): Promise<boolean> => {
     const deletedItemModelCount = await this.itemModel.destroy({
       where: { id },
     });
     return !!deletedItemModelCount;
-  }
+  };
 
-  async getAll(limit: number = 10): Promise<ItemOutput[]> {
-    return this.itemModel.findAll({ limit });
-  }
+  getAll = async (limit: number = 10): Promise<ItemOutput[]> => this.itemModel.findAll({ limit });
 }
 
 export default ItemDal;

@@ -7,7 +7,6 @@ export interface ItemAttributes {
   price?: number;
   createdAt?: Date;
   updatedAt?: Date;
-  deleteAt?: Date;
 }
 
 export interface ItemInput extends Optional<ItemAttributes, 'id'> {}

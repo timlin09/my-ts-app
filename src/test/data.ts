@@ -1,0 +1,68 @@
+const testData = [
+  {
+    id: 1,
+    name: 'John',
+    price: 3000,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    deleteAt: null,
+  },
+  {
+    id: 2,
+    name: 'Tim Lin',
+    price: 2000,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    deleteAt: null,
+  },
+  {
+    id: 3,
+    name: 'Tim Lin1',
+    price: 2000,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    deleteAt: null,
+  },
+  {
+    id: 4,
+    name: 'Tim Lin2',
+    price: 2000,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    deleteAt: null,
+  },
+  {
+    id: 5,
+    name: 'Tim Lin',
+    price: 18554,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    deleteAt: null,
+  },
+  {
+    id: 6,
+    name: 'John4',
+    price: 50000,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    deleteAt: null,
+  },
+  {
+    id: 7,
+    name: 'John11',
+    price: 9917,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    deleteAt: null,
+  },
+  {
+    id: 8,
+    name: 'John4',
+    price: 2229,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    deleteAt: null,
+  },
+];
+
+export default testData;
