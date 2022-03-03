@@ -1,14 +1,15 @@
 import { Request, Response } from 'express';
 import MainRoute from './route.abstract';
 import ItemDal from '../db/dal/item';
-import ItemController from '../controllers/items/item.controller';
+import ItemService from '../controllers/items/item.service';
+import { ItemInput } from '../db/model/item.model';
 
 class ItemRoutes extends MainRoute {
-  private itemController: ItemController<ItemDal>;
+  private itemService: ItemService<ItemDal>;
 
   constructor() {
     super();
-    this.itemController = new ItemController(new ItemDal());
+    this.itemService = new ItemService(new ItemDal());
     this.setRoutes();
   }
 
@@ -25,7 +26,10 @@ class ItemRoutes extends MainRoute {
    * @returns {{}} 200 - success, return inserted data & related info
    * @returns {Error} 500 - unexpected error
    */
-      .get(this.itemController.getAllItems)
+      .get(async (req:Request, res:Response) => {
+        const items = await this.itemService.getItemAll();
+        return res.status(items.code).json({ message: items.message, data: items.datas });
+      })
     /**
    * create item
    *
@@ -36,7 +40,11 @@ class ItemRoutes extends MainRoute {
    * @returns {Error} 404 - invaild name/price value error
    * @returns {Error} 500 - unexpected error
    */
-      .post(this.itemController.createOne);
+      .post(async (req:Request, res:Response) => {
+        const newItem: ItemInput = req.body || {};
+        const item = await this.itemService.createItem(newItem);
+        return res.status(item.code).json({ message: item.message, data: item.data });
+      });
 
     this.router.route('/items/:id')
 
@@ -50,7 +58,11 @@ class ItemRoutes extends MainRoute {
         * @returns {Error} 404 - invaild itemId error
         * @returns {Error} 500 - unexpected error
       */
-      .get(this.itemController.getOneItem)
+      .get(async (req:Request, res:Response) => {
+        const itemId = Number(req.params.id);
+        const item = await this.itemService.getItemById(itemId);
+        return res.status(item.code).json({ message: item.message, data: item.data });
+      })
 
       /**
         * update items by id
@@ -64,7 +76,14 @@ class ItemRoutes extends MainRoute {
         * @returns {Error} 404 - invaild itemId error
         * @returns {Error} 500 - unexpected error
       */
-      .put(this.itemController.updateOne)
+      .put(async (req:Request, res:Response) => {
+        const itemId = Number(req.params.id) || 0;
+        const itemData: ItemInput = req.body;
+        const updateItem = await this.itemService.updateItemById(itemId, itemData);
+        return res
+          .status(updateItem.code)
+          .json({ message: updateItem.message, data: updateItem.data });
+      })
       /**
         * delete items by id
         *
@@ -75,7 +94,11 @@ class ItemRoutes extends MainRoute {
         * @returns {Error} 404 - invaild itemId error
         * @returns {Error} 500 - unexpected error
       */
-      .delete(this.itemController.deleteOne);
+      .delete(async (req:Request, res:Response) => {
+        const itemId = Number(req.params.id) || 0;
+        const item = await this.itemService.deleteItemById(itemId);
+        return res.status(item.code).json({ message: item.message, data: item.data });
+      });
   };
 }
 
