@@ -38,7 +38,6 @@ describe('POST /items', () => {
 describe('GET /items/id', () => {
   test('get item with normal itemId', async () => {
     const res = await itemServiceEmpty.getItemById(1);
-    console.log(`${JSON.stringify(res)}`);
     if (!res.data) {
       expect(res).toMatchObject({ code: 500, message: res.message });
       return;
@@ -113,7 +112,6 @@ describe('DELETE /items/id', () => {
   });
   test('delet item with large random int', async () => {
     const res = await itemServiceEmpty.deleteItemById(1, 200000);
-    console.log(`${JSON.stringify(res)}`);
     if (!res.data && res.code !== 200) {
       expect(res).toMatchObject({ code: 500 });
       return;
@@ -128,7 +126,6 @@ describe('DELETE /items/id', () => {
 
   test('delet item with large itemId & rnt', async () => {
     const res = await itemServiceEmpty.deleteItemById(10000, 200000);
-    console.log(`${JSON.stringify(res)}`);
     if (!res.data && res.code !== 200) {
       expect(res).toMatchObject({ code: 500 });
       return;
