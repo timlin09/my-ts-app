@@ -1,11 +1,14 @@
-import ItemService from '../controllers/items/item.service';
+import ItemService from '../item.service';
 import testData from './data';
-import TestDalModel from './test.dal.moel';
+import { BaseDal } from '../../../db/dal/item';
+import TestDalModel from '../../../db/dal/test.dal.moel';
 
-const testDalModel = new TestDalModel();
-const itemServiceEmpty = new ItemService(testDalModel);
+let testDalModel : TestDalModel;
+let itemServiceEmpty : ItemService<BaseDal>;
 
 beforeEach(() => {
+  testDalModel = new TestDalModel();
+  itemServiceEmpty = new ItemService(testDalModel);
   testDalModel.fakeItem = testData;
 });
 

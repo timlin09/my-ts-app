@@ -1,5 +1,5 @@
-import { ItemInput, ItemOutput } from '../db/model/item.model';
-import { BaseDal } from '../db/dal/item';
+import { ItemInput, ItemOutput } from '../model/item.model';
+import { BaseDal } from './item';
 
 class TestDalModel implements BaseDal {
   private fakeItems: ItemOutput[];
